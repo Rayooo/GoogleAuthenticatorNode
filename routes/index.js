@@ -2,7 +2,6 @@ var express = require('express');
 var router = express.Router();
 var speakeasy = require("speakeasy");
 
-/* GET home page. */
 router.get('/', function(req, res, next) {
     var secret = speakeasy.generateSecret();
     console.log(secret.base32);
@@ -20,8 +19,7 @@ router.post("/verify",function (req, res, next) {
         secret: secretKey,
         token: code
     });
-    console.log(tokenValidates);
-
+    res.send({result:tokenValidates});
 })
 
 module.exports = router;
