@@ -5,8 +5,8 @@ var speakeasy = require("speakeasy");
 /* GET home page. */
 router.get('/', function(req, res, next) {
     var secret = speakeasy.generateSecret();
-
-    res.render('index', { title: secret,qrcode: "http://qr.liantu.com/api.php?&w=400&text=" + secret.otpauth_url });
+    var url = speakeasy.otpauthURL({ secret: secret.ascii, label: 'Ray', algorithm: 'sha512' });
+    res.render('index', { title: secret,qrcode: "http://qr.liantu.com/api.php?&w=400&text=" + url });
 
 });
 
