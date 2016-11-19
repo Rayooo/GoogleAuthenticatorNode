@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 var speakeasy = require("speakeasy");
+var passwordHash = require("password-hash");
 
 router.get('/', function(req, res, next) {
     var secret = speakeasy.generateSecret();
@@ -20,6 +21,20 @@ router.post("/verify",function (req, res, next) {
         token: code
     });
     res.send({result:tokenValidates});
-})
+});
+
+
+router.post("/register",function (req, res, next) {
+    var password = req.body.password;
+    var hashedPassword = passwordHash.generate(password,{algorithm:"sha512",saltLength:20});
+    console.log(hashedPassword);
+
+    console.log("检测密码是否正确" + passwordHash.verify('password123', hashedPassword));
+
+    console.log("检测密码是否正确" + passwordHash.verify(password, hashedPassword));
+
+    res.send({hashedPassword:hashedPassword});
+});
+
 
 module.exports = router;
