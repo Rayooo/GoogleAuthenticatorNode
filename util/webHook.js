@@ -1,9 +1,7 @@
-/**
- * Created by Ray on 2016/11/19.
- */
 var http = require('http');
 var createHandler = require('github-webhook-handler');
 var handler = createHandler({ path: '/webhook', secret: 'JustSecretKey' });
+var shell = require('shelljs');
 
 http.createServer(function (req, res) {
     handler(req, res, function (err) {
@@ -20,6 +18,17 @@ handler.on('push', function (event) {
     console.log('Received a push event for %s to %s',
         event.payload.repository.name,
         event.payload.ref)
+
+    shell.cd("~");
+
+    shell.exec("git clone https://github.com/Rayooo/GoogleAuthenticatorNode.git");
+
+    cd("GoogleAuthenticatorNode");
+
+    shell.exec("npm install");
+
+    shell.exec("nodejs bin/www");
+
 });
 
 handler.on('issues', function (event) {

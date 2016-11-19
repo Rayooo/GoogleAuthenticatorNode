@@ -18,6 +18,8 @@
 
 GitHubWebHook的第三方库  https://github.com/rvagg/github-webhook-handler
 
+shelljs 执行shell的第三方库  https://www.npmjs.com/package/shelljs
+
 npm install
 
 node bin/www
