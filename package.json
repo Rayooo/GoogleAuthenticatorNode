@@ -14,6 +14,7 @@
     "morgan": "~1.7.0",
     "password-hash": "^1.2.2",
     "serve-favicon": "~2.3.0",
-    "speakeasy": "^2.0.0"
+    "speakeasy": "^2.0.0",
+    "github-webhook-handler": "^0.6.0"
   }
 }
