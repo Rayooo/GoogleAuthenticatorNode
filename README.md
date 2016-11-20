@@ -33,7 +33,8 @@ CREATE TABLE IF NOT EXISTS user(
   create_date TIMESTAMP NULL DEFAULT now(),
   password TEXT NOT NULL,
   secret_key TEXT,
-  token TEXT
+  token TEXT,
+  token_create_time TIMESTAMP
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 2.开启服务

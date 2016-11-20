@@ -9,7 +9,19 @@ var index = require('./routes/index');
 var user = require('./routes/user');
 
 var app = express();
-
+const createSql = require('./config/mysqlConfig').createSql;
+const queryAsync = require('./config/mysqlConfig').queryAsync;
+queryAsync(createSql).then(function(result){
+  console.log("创建user表成功");
+}).error(function(){
+  if(err){
+    console.error("创建user表失败");
+  }
+}).catch(function(err){
+  if(err){
+    console.error("创建user表失败");
+  }
+})
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');

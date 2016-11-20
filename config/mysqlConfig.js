@@ -33,7 +33,9 @@ const createSql = "CREATE TABLE IF NOT EXISTS user("+
                         "create_date TIMESTAMP NULL DEFAULT now(),"+
                         "password TEXT NOT NULL," +
                         "secret_key TEXT NOT NULL," +
-                        "token TEXT NOT NULL" +
+                        "token TEXT NOT NULL," +
+                        "token_create_time TIMESTAMP" +
                     ")ENGINE=InnoDB DEFAULT CHARSET=utf8;";
 
 module.exports.queryAsync = queryAsync;
+module.exports.createSql = createSql;
