@@ -25,7 +25,12 @@ handler.on('push', function (event) {
 
     shell.exec("npm install");
 
-    shell.exec("nodejs bin/www");
+    shell.cd("~/GoogleAuthenticatorNode/bin");
+
+    shell.sed('-i', '3000', '80', 'www');
+
+    //使用nodemon不用重启node
+    // shell.exec("nodejs ~/GoogleAuthenticatorNode/bin/www");
 
     console.log("Start Node at" + new Date());
 });
