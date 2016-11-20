@@ -20,7 +20,24 @@ GitHubWebHook的第三方库  https://github.com/rvagg/github-webhook-handler
 
 shelljs 执行shell的第三方库  https://www.npmjs.com/package/shelljs
 
+
+1.数据库建表:
+
+CREATE DATABASE google_auth;
+
+use google_auth;
+
+CREATE TABLE IF NOT EXISTS user(
+  id INT PRIMARY KEY AUTO_INCREMENT,
+  username VARCHAR(255) NOT NULL UNIQUE,
+  create_date TIMESTAMP NULL DEFAULT now(),
+  password TEXT NOT NULL,
+  secret_key TEXT,
+  token TEXT
+)ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+2.开启服务
+
 npm install
 
 node bin/www
-

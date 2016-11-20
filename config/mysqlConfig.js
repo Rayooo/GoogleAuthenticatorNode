@@ -29,9 +29,11 @@ pool.on('error', function (error) {
 var queryAsync = Promise.promisify(pool.query, {context: pool, multiArgs: true});
 const createSql = "CREATE TABLE IF NOT EXISTS user("+
                         "id INT PRIMARY KEY AUTO_INCREMENT,"+
-                        "username VARCHAR(255) NOT NULL ,"+
+                        "username VARCHAR(255) NOT NULL UNIQUE,"+
                         "create_date TIMESTAMP NULL DEFAULT now(),"+
-                        "password TEXT NOT NULL " +
+                        "password TEXT NOT NULL," +
+                        "secret_key TEXT NOT NULL," +
+                        "token TEXT NOT NULL" +
                     ")ENGINE=InnoDB DEFAULT CHARSET=utf8;";
 
 module.exports.queryAsync = queryAsync;
