@@ -6,7 +6,7 @@ var passwordHash = require("password-hash");
 router.get('/', function(req, res, next) {
     var secret = speakeasy.generateSecret();
     console.log(secret.base32);
-    var url = speakeasy.otpauthURL({ secret: secret.base32, label: 'Ray', algorithm: 'sha1' });
+    var url = speakeasy.otpauthURL({ secret: secret.base32, label: 'Ray-TomKK-WYH', algorithm: 'sha1' });
     res.render('index', { title: secret,qrcode: "http://qr.liantu.com/api.php?&w=400&text=" + url });
 });
 
@@ -14,7 +14,7 @@ router.get('/', function(req, res, next) {
 router.post("/verify",function (req, res, next) {
     var code = req.body.code;
     //这个key就是上面的secret.base32
-    var secretKey = "O56TMLSJMRLWKV2LLIUE423IEU4TUPZVIVTXILSUOY7FQPRJKIXQ";
+    var secretKey = "HJMGY6KJHRHGEWS5PNET42BMMVLF423BMJTHS4S5NA5E6SCXNURQ";
 
     var tokenValidates = speakeasy.totp.verify({
         secret: secretKey,
