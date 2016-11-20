@@ -21,6 +21,8 @@ handler.on('push', function (event) {
 
     shell.cd("~/GoogleAuthenticatorNode");
 
+    shell.exec("git reset --hard");
+
     shell.exec("git pull");
 
     shell.exec("npm install");
