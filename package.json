@@ -13,8 +13,11 @@
     "ejs": "~2.5.2",
     "express": "~4.14.0",
     "morgan": "~1.7.0",
+    "password-hash": "^1.2.2",
     "mysql": "^2.12.0",
     "serve-favicon": "~2.3.0",
-    "speakeasy": "^2.0.0"
+    "speakeasy": "^2.0.0",
+    "github-webhook-handler": "^0.6.0",
+    "shelljs": "^0.7.5"
   }
 }
