@@ -19,8 +19,6 @@ router.put("/register",function (req,res,next) {
         .then(function (data) {
             res.send(data);
         })
-
-
 })
 
 
