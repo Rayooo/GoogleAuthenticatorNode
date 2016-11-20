@@ -17,18 +17,17 @@ handler.on('error', function (err) {
 handler.on('push', function (event) {
     console.log('Received a push event for %s to %s',
         event.payload.repository.name,
-        event.payload.ref)
+        event.payload.ref);
 
-    shell.cd("~");
+    shell.cd("~/GoogleAuthenticatorNode");
 
-    shell.exec("git clone https://github.com/Rayooo/GoogleAuthenticatorNode.git");
-
-    cd("GoogleAuthenticatorNode");
+    shell.exec("git pull");
 
     shell.exec("npm install");
 
     shell.exec("nodejs bin/www");
 
+    console.log("Start Node at" + new Date());
 });
 
 handler.on('issues', function (event) {
