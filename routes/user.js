@@ -12,7 +12,7 @@ router.put("/register",function (req,res,next) {
     var password = req.body.password;
     var secret_key = speakeasy.generateSecret().base32;
     var token = speakeasy.generateSecret().base32;
-    var url = speakeasy.otpauthURL({ secret: secret_key, label: 'Ray-TomKK-WYH', algorithm: 'sha1' });
+    var url = speakeasy.otpauthURL({ secret: secret_key, label: username, algorithm: 'sha1' });
     var hashedPassword = passwordHash.generate(password,{algorithm:"sha512",saltLength:20});
 
     query("INSERT INTO user(username,password,secret_key,token,token_create_time) VALUE(?,?,?,?,?)",[username,hashedPassword,secret_key,token,new Date()])
