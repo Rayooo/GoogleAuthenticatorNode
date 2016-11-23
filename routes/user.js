@@ -19,7 +19,23 @@ router.put("/register",function (req,res,next) {
         .then(function (data) {
             res.send(data);
         })
-})
+});
+
+router.post("/login",function (req, res, next) {
+    var username = req.body.username;
+    var password = req.body.password;
+
+    query("SELECT * FROM user WHERE username=?",[username]).then(function (data) {
+        if(data[0] && data[0][0] && passwordHash.verify(password, data[0][0].password)){
+            res.send(data[0][0])
+        }
+        else{
+            res.send("密码错误");
+        }
+    }).error(function (data) {
+        res.send(data);
+    })
+});
 
 
 module.exports = router;
