@@ -27,9 +27,10 @@ handler.on('push', function (event) {
 
     shell.exec("npm install");
 
-    shell.cd("~/GoogleAuthenticatorNode/bin");
+    // shell.cd("~/GoogleAuthenticatorNode/bin");
 
-    shell.sed('-i', '3000', '80', 'www');
+    //使用nginx转发端口
+    // shell.sed('-i', '3000', '80', 'www');
 
     //使用nodemon不用重启node
     // shell.exec("nodejs ~/GoogleAuthenticatorNode/bin/www");
