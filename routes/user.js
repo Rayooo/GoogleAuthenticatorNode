@@ -40,7 +40,7 @@ router.post("/login",function (req, res, next) {
                     //重新生成token
                     token:speakeasy.generateSecret().base32,
                     id:queryResult.id
-                }
+                };
                 //刷新token
                 query("UPDATE user SET token = ?,token_create_time = ? WHERE id = ?",[userInfo.token, new Date(),userInfo.id])
                     .then(function(data){

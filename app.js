@@ -24,7 +24,7 @@ mysqlQueryAsync(createSql).then(function (result) {
     if (err) {
         console.error("创建user表失败");
     }
-})
+});
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
@@ -54,7 +54,7 @@ app.use(function (req, res, next) {
     };
 
     next();
-})
+});
 
 //身份安全认证
 app.use(function (req, res, next) {
@@ -74,7 +74,6 @@ app.use(function (req, res, next) {
                     res.error(ResultState.AUTH_ERROR_CODE, "登录已过期，请重新登录");
                 } else {
                     next();
-                    return;
                 }
             } else {
                 res.error(ResultState.AUTH_ERROR_CODE, "非法访问");
@@ -82,7 +81,7 @@ app.use(function (req, res, next) {
         }, function (err) {
             res.error(ResultState.SERVER_EXCEPTION_ERROR_CODE, err);
         })
-})
+});
 
 //加入自定义路由
 app.use('/', index);
