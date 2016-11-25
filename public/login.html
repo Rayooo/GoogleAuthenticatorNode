@@ -5,6 +5,9 @@
     <title>登陆</title>
 
     <link href="stylesheets/bootstrap.min.css" rel="stylesheet">
+    <link href="stylesheets/sweetalert.css" rel="stylesheet">
+    <script src="js/sweetalert.min.js"></script>
+
 
     <style>
 
@@ -70,16 +73,22 @@
 <script src="js/particles.js"></script>
 <script src="js/particlesSetting.js"></script>
 
-<div class="container" style="padding-top: 200px">
+<script src="js/vue.js"></script>
+<script src="js/vue-resource.min.js"></script>
+<script src="js/config.js"></script>
+
+
+<div class="container" style="padding-top: 200px" id="vue">
 
     <div class="form-signin" role="form">
         <h2 class="form-signin-heading text-lg-center text-md-center text-sm-center">登陆</h2>
 
-        <input type="email" class="form-control" placeholder="用户名" autofocus>
-        <input type="password" class="form-control" placeholder="密码">
+        <input type="text" class="form-control" v-model="userName" placeholder="用户名" autofocus>
+        <input type="password" class="form-control" v-model:id="password" style="margin-bottom: 0" placeholder="密码">
+        <input type="text" class="form-control" v-model:id="dynamicPassword" placeholder="6位动态密码">
 
         <div class="text-lg-center text-md-center text-sm-center" style="margin-top: 20px">
-            <button class="btn btn-lg btn-primary" >登陆</button>
+            <button class="btn btn-lg btn-primary" v-on:click="login" >登陆</button>
             <button class="btn btn-lg btn-success" onclick="location.href='/register.html'">注册</button>
 
         </div>
@@ -87,6 +96,34 @@
     </div>
 
 </div>
+
+<script>
+    var app = new Vue({
+        el: '#vue',
+        data: {
+            userName: "",
+            password: "",
+            dynamicPassword:""
+        },
+        methods:{
+            login:function () {
+                var param = {username:this.userName,password:this.password,code:this.code};
+                Vue.http.post(getHostIP() + 'user/login', param).then(function (res) {
+                    var data = res.body;
+                    if(data.code == 0){
+                        sessionStorage.setItem("user", JSON.stringify(data.returnValue));
+                        window.location.href = "/userHomePage.html";
+                    }
+                    else{
+                        swal("对不起",data.errorReason,"");
+                    }
+                }, function (data) {
+                    swal("对不起","您的网络有问题","");
+                });
+            }
+        }
+    })
+</script>
 
 
 
