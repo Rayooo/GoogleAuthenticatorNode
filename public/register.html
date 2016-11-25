@@ -8,9 +8,7 @@
     <script src="js/jquery.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="stylesheets/font-awesome.min.css">
-    <script src="js/sweetalert.min.js"></script>
     <link rel="stylesheet" href="stylesheets/sweetalert.css">
-    <script src="js/vue.js"></script>
     <style>
         .form-signin {
             max-width: 330px;
@@ -62,6 +60,10 @@
 </head>
 <body>
 
+<script src="js/vue.js"></script>
+<script src="js/vue-resource.min.js"></script>
+<script src="js/config.js"></script>
+
 
 <div id="container"></div>
 <script src="js/three.js"></script>
@@ -76,22 +78,52 @@
 </script>
 
 
-<div class="container" style="padding-top: 200px;">
+<div class="container" style="padding-top: 200px;" id="vue">
 
-    <form class="form-signin" role="form">
+    <div class="form-signin" role="form">
         <h2 class="form-signin-heading text-lg-center text-md-center text-sm-center">注册</h2>
 
-        <input type="email" class="form-control" placeholder="用户名" autofocus>
-        <input type="password" class="form-control" placeholder="密码">
+        <input type="text" class="form-control" v-model="userName" placeholder="用户名" autofocus>
+        <input type="password" class="form-control" v-model="password" placeholder="密码">
 
         <div class="text-lg-center text-md-center text-sm-center" style="margin-top: 20px">
-            <button class="btn btn-lg btn-success btn-block">注册</button>
+            <button class="btn btn-lg btn-success btn-block" v-on:click="register">注册</button>
         </div>
 
-    </form>
+    </div>
 
 </div>
 
+<script>
+    var app = new Vue({
+        el: '#vue',
+        data: {
+            userName: "",
+            password: ""
+        },
+        methods:{
+            register:function () {
+                var param = {username:this.userName,password:this.password};
+                Vue.http.put(getHostIP() + 'user/register', param).then(function (res) {
+                    var data = res.body;
+                    if(data.code == 0){
+                        swal({
+                            title: "请扫描以下二维码",
+                            text: "<img width='200px' height='200px' src="+data.returnValue + "/>",
+                            html: true
+                    });
+                    }
+                    else{
+                        swal("对不起",data.errorReason,"");
+                    }
+                }, function (data) {
+                    swal("对不起","您的网络有问题","");
+                });
+            }
+        }
+    })
+</script>
+<script src="js/sweetalert.min.js"></script>
 
 
 </body>

@@ -19,6 +19,9 @@ router.put("/register",function (req,res,next) {
         .then(function (data) {
             res.success(url);
         })
+        .error(function (data) {
+            res.error(ResultState.BUSINESS_ERROR_CODE,"注册错误");
+        })
 });
 
 router.post("/login",function (req, res, next) {
