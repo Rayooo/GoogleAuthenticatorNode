@@ -59,7 +59,7 @@ app.use(function (req, res, next) {
 //身份安全认证
 app.use(function (req, res, next) {
     //登录接口不需要token认证
-    if(req.originalUrl == "/user/login"||req.originalUrl == "/user/register"){
+    if(req.originalUrl == "/user/login"||req.originalUrl == "/user/register"||req.originalUrl == '/'){
         next();
         return;
     }
