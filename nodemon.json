@@ -2,8 +2,7 @@
   "restartable": "rs",
   "verbose": false,
   "execMap": {
-    "": "node ./bin/httpsServer",
-    "port3002":"node ./bin/httpsServer2"
+    "": "node ./bin/httpsServer"
   },
   "watch": [
     "bin/",
