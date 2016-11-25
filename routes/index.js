@@ -37,4 +37,9 @@ router.post("/register",function (req, res, next) {
 });
 
 
+router.post("/testNodemon",function (req, res, next) {
+    var info = req.body.info;
+    res.success(info);
+});
+
 module.exports = router;
