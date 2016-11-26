@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>注册</title>
     <link href="stylesheets/bootstrap.min.css" rel="stylesheet">
-    <script src="js/jquery.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="stylesheets/font-awesome.min.css">
     <link rel="stylesheet" href="stylesheets/sweetalert.css">
@@ -62,11 +61,11 @@
 
 <script src="js/vue.js"></script>
 <script src="js/vue-resource.min.js"></script>
-<script src="js/config.js"></script>
+<script src="js/util.js"></script>
 
 
 <div id="container"></div>
-<script src="js/three.js"></script>
+<script src="js/three.min.js"></script>
 <script src="js/Detector.js"></script>
 <script src="js/Projector.js"></script>
 <script src="js/CanvasRenderer.js"></script>
@@ -74,7 +73,7 @@
 <script src="js/Bird.js"></script>
 <script src="js/brids.js"></script>
 <script>
-    $("canvas")[0].remove();
+    document.getElementsByTagName("canvas")[0].remove();
 </script>
 
 
