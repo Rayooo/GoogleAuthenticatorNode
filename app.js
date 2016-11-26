@@ -7,6 +7,7 @@ var bodyParser = require('body-parser');
 
 var index = require('./routes/index');
 var user = require('./routes/user');
+var data = require('./routes/data');
 
 var app = express();
 var ResultState = require('./ResultState');
@@ -59,7 +60,7 @@ app.use(function (req, res, next) {
 //身份安全认证
 app.use(function (req, res, next) {
     //登录接口不需要token认证
-    if(req.originalUrl == "/user/login"||req.originalUrl == "/user/register"||req.originalUrl == '/'){
+    if(req.originalUrl == "/user/login"||req.originalUrl == "/user/register"||req.originalUrl == '/'||req.originalUrl == '/data/allData'){
         next();
         return;
     }
@@ -86,7 +87,7 @@ app.use(function (req, res, next) {
 //加入自定义路由
 app.use('/', index);
 app.use('/user', user);
-
+app.use('/data', data);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

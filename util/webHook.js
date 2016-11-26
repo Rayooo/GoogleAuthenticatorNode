@@ -27,7 +27,9 @@ handler.on('push', function (event) {
 
     shell.exec("npm install");
 
-    // shell.cd("~/GoogleAuthenticatorNode/bin");
+    shell.cd("~/GoogleAuthenticatorNode/public/js");
+
+    shell.sed('-i', 'https://localhost:3001/', 'https://115.159.98.67/', 'util.js');
 
     //使用nginx转发端口
     // shell.sed('-i', '3000', '80', 'www');

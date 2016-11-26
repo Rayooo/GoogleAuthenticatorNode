@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>用户列表</title>
+    <link href="stylesheets/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.bootcss.com/jquery/3.1.1/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+</head>
+<body>
+
+<script src="https://cdn.bootcss.com/vue/2.1.0/vue.js"></script>
+<script src="js/vue-resource.min.js"></script>
+<script src="js/util.js"></script>
+
+
+<div id="vue">
+    <table class="table" >
+        <thead>
+        <tr>
+            <th v-for="key in gridColumns">
+                <span>{{key}}</span>
+            </th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr v-for="entry in gridData">
+            <td v-for="key in gridColumns">
+                {{entry[key]}}
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+
+<script>
+    var demo = new Vue({
+        el: '#vue',
+        data: {
+            gridColumns: ['id', 'username', "password", "secret_key", "token"],
+            gridData: null
+        },
+        methods:{
+            getData:function () {
+                Vue.http.get(getHostIP() + 'data/allData').then(function (res) {
+                    var data2 = res.body;
+                    if(data2.code == 0){
+                        this.gridData = data2.returnValue;
+                        console.log(data2.returnValue);
+                        //TODO vue无法绑定数据
+                    }
+                    else{
+                        swal("对不起",data.errorReason,"");
+                    }
+                }, function (data) {
+                    swal("对不起","您的网络有问题","");
+                });
+            }
+        },
+        created: function () {
+            this.getData()
+        }
+    });
+
+
+</script>
+
+</body>
+</html>
