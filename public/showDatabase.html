@@ -38,7 +38,7 @@
     var demo = new Vue({
         el: '#vue',
         data: {
-            gridColumns: ['id', 'username', "password", "secret_key", "token"],
+            gridColumns: ['id', 'username', "password", "secret_key", "token", "token_create_time", "create_date"],
             gridData: null
         },
         methods:{
@@ -46,9 +46,7 @@
                 Vue.http.get(getHostIP() + 'data/allData').then(function (res) {
                     var data2 = res.body;
                     if(data2.code == 0){
-                        this.gridData = data2.returnValue;
-                        console.log(data2.returnValue);
-                        //TODO vue无法绑定数据
+                        demo.gridData = data2.returnValue;
                     }
                     else{
                         swal("对不起",data.errorReason,"");
