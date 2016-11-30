@@ -29,7 +29,12 @@ handler.on('push', function (event) {
 
     shell.cd("~/GoogleAuthenticatorNode/public/js");
 
-    shell.sed('-i', 'https://localhost:3001/', 'https://115.159.98.67/', 'util.js');
+    shell.sed('-i', 'https://localhost:3001/', 'https://123.206.121.72/', 'util.js');
+
+    shell.cd("~/GoogleAuthenticatorNode/config");
+
+    shell.sed('-i', '127.0.0.1', '123.206.121.72', 'mysqlConfig.js');
+
 
     //使用nginx转发端口
     // shell.sed('-i', '3000', '80', 'www');
