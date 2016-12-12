@@ -35,6 +35,8 @@ handler.on('push', function (event) {
 
     shell.sed('-i', '127.0.0.1', '123.206.121.72', 'mysqlConfig.js');
 
+    shell.sed('-i', "password        : 'root'", "password        : 'helloMysql'", 'mysqlConfig.js');
+
 
     //使用nginx转发端口
     // shell.sed('-i', '3000', '80', 'www');
