@@ -67,4 +67,56 @@ router.post("/login",function (req, res, next) {
     })
 });
 
+router.post("/getQRCode",function (req, res, next) {
+    var id = req.body.id;
+
+    query("SELECT * FROM user WHERE id=?",[id])
+        .then(function (data) {
+            var queryResult = data[0][0];
+            var url = "http://qr.liantu.com/api.php?&w=400&text=" + speakeasy.otpauthURL({ secret: queryResult.secret_key, label: queryResult.username, algorithm: 'sha1' });
+            res.success(url);
+        })
+        .error(function (data) {
+            res.error(ResultState.BUSINESS_ERROR_CODE,"注册错误");
+        })
+})
+
+router.post("/changePassword",function (req, res, next) {
+    var id = req.body.id;
+    var dynamicPassword = req.body.dynamicPassword;
+    var newPassword = req.body.newPassword;
+    var oldPassword = req.body.oldPassword;
+
+    query("SELECT id,username,password,secret_key,token,token_create_time FROM user WHERE id=?",[id]).then(function (data) {
+        var queryResult = data[0][0];
+        if(data[0] && queryResult && passwordHash.verify(oldPassword, queryResult.password)){
+            var tokenValidates = speakeasy.totp.verify({
+                secret: queryResult.secret_key,
+                token: dynamicPassword
+            });
+
+            if(tokenValidates){
+                var hashedPassword = passwordHash.generate(newPassword,{algorithm:"sha512",saltLength:20});
+                query("UPDATE user SET password = ? WHERE id = ?",[hashedPassword,id])
+                    .then(function(data){
+                        //一切顺利返回用户信息
+                        res.success(data);
+
+                    }).error(function(err){
+                        res.error(ResultState.SERVER_EXCEPTION_ERROR_CODE, err);
+                    })
+            }
+            else{
+                res.error(ResultState.SERVER_EXCEPTION_ERROR_CODE, "动态密码错误");
+            }
+        }
+        else{
+            res.error(ResultState.BUSINESS_ERROR_CODE, "密码错误");
+        }
+    }).error(function (error) {
+        res.error(ResultState.SERVER_EXCEPTION_ERROR_CODE, "密码错误");
+    })
+
+})
+
 module.exports = router;

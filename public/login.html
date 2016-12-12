@@ -111,7 +111,8 @@
                 Vue.http.post(getHostIP() + 'user/login', param).then(function (res) {
                     var data = res.body;
                     if(data.code == 0){
-                        sessionStorage.setItem("user", JSON.stringify(data.returnValue));
+                        setUser(data.returnValue);
+                        setToken(data.returnValue.token);
                         window.location.href = "/userHomePage.html";
                     }
                     else{
