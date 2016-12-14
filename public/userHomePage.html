@@ -150,7 +150,8 @@
                                         'token': getToken().toString(),
                                         'userid': getUser().id.toString()
                                     }
-                                }).then(function (data) {
+                                }).then(function (res) {
+                                    var data = res.body;
                                     if(data.code == 0){
                                         swal("成功","更新密码成功","success");
 									}
