@@ -156,11 +156,14 @@
                                         swal("成功","更新密码成功","success");
 									}
 									else{
-                                        swal("对不起",data.errorReason,"");
+                                        swal("对不起",data.errorReason,"warning");
 									}
                                 }, function (data) {
-                                    swal("对不起","您的网络有问题","");
+                                    swal("对不起","您的网络有问题","warning");
                                 });
+                            }
+                            else{
+                                swal("对不起","新密码和重复密码不一致","warning")
                             }
                         }
                     },
