@@ -387,7 +387,7 @@ print 'It took ' + i + ' iterations to sort the deck.';</code></pre>
                             var param = {id:getUser().id};
                             Vue.http.post(getHostIP() + 'user/getQRCode', param,{
                                 headers: {
-                                    'login_token': getToken().toString(),
+                                    'token': getToken().toString(),
                                     'userid': getUser().id.toString()
                                 }
                             }).then(function (res) {
@@ -407,7 +407,7 @@ print 'It took ' + i + ' iterations to sort the deck.';</code></pre>
                                 var param = {id:getUser().id,dynamicPassword:this.dynamicPassword,newPassword:this.newPassword,oldPassword:this.oldPassword};
                                 Vue.http.post(getHostIP() + 'user/changePassword', param,{
                                     headers: {
-                                        'login_token': getToken().toString(),
+                                        'token': getToken().toString(),
                                         'userid': getUser().id.toString()
                                     }
                                 }).then(function (data) {
