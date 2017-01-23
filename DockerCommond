@@ -6,3 +6,4 @@ docker images 显示镜像
 docker rm 容器名  删除某个容器
 docker rmi 镜像名  删除某个镜像
 
+sudo docker run -p 80:3000 -d node-app(镜像名)  启动镜像，并且映射端口
