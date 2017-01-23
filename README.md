@@ -41,4 +41,4 @@ CREATE TABLE IF NOT EXISTS user(
 
 npm install
 
-node bin/httpsServer
+node bin/www

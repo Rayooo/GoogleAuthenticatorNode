@@ -63,7 +63,7 @@ app.use(function (req, res, next) {
 //身份安全认证
 app.use(function (req, res, next) {
     //登录接口不需要token认证
-    if(req.originalUrl == "/user/login"||req.originalUrl == "/user/register"||req.originalUrl == '/'||req.originalUrl == '/data/allData'){
+    if(req.originalUrl == "/user/login"||req.originalUrl == "/user/register"||req.originalUrl == '/'||req.originalUrl == '/data/allData'||req.originalUrl == '/user/loginNoCode'){
         next();
         return;
     }

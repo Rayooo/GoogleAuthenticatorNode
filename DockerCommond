@@ -1,0 +1,8 @@
+docker ps 显示正在运行的容器
+docker ps -a 显示所有容器，包括暂停的
+
+docker images 显示镜像
+
+docker rm 容器名  删除某个容器
+docker rmi 镜像名  删除某个镜像
+

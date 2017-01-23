@@ -67,6 +67,40 @@ router.post("/login",function (req, res, next) {
     })
 });
 
+router.post("/loginNoCode",function (req, res, next) {
+    var username = req.body.username;
+    var password = req.body.password;
+    //校验密码
+    query("SELECT id,username,password,secret_key,token,token_create_time FROM user WHERE username=?",[username]).then(function (data) {
+        var queryResult = data[0][0];
+        if(data[0] && queryResult && passwordHash.verify(password, queryResult.password)){
+            var userInfo = {
+                username:queryResult.username,
+                //重新生成token
+                token:speakeasy.generateSecret().base32,
+                id:queryResult.id
+            };
+            //刷新token
+            query("UPDATE user SET token = ?,token_create_time = ? WHERE id = ?",[userInfo.token, new Date(),userInfo.id])
+                .then(function(data){
+                    //一切顺利返回用户信息
+                    res.success(userInfo);
+                    return;
+
+                }).error(function(err){
+                res.error(ResultState.SERVER_EXCEPTION_ERROR_CODE, err);
+                return;
+            })
+        }
+        else{
+            res.error(ResultState.BUSINESS_ERROR_CODE, "密码错误");
+        }
+    }).error(function (error) {
+        res.error(ResultState.SERVER_EXCEPTION_ERROR_CODE, error);
+    })
+})
+
+
 router.post("/getQRCode",function (req, res, next) {
     var id = req.body.id;
 
