@@ -1,5 +1,7 @@
 # GoogleAuthenticatorNode
 
+https的服务在2016年12月14日a8ce526的版本上
+
 后端Node
 
 数据库Mysql

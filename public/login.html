@@ -85,6 +85,7 @@
 
         <input type="text" class="form-control" v-model="userName" placeholder="用户名" autofocus>
         <input type="password" class="form-control" v-model="password" style="margin-bottom: 0" placeholder="密码">
+        <input type="text" class="form-control" v-model="dynamicPassword" placeholder="6位动态密码">
 
         <div class="text-lg-center text-md-center text-sm-center" style="margin-top: 20px">
             <button class="btn btn-lg btn-primary" v-on:click="login" >登陆</button>
@@ -102,12 +103,13 @@
         data: {
             userName: "",
             password: "",
+            dynamicPassword:""
         },
         methods:{
             login:function () {
-                var param = {username:this.userName,password:this.password};
-                Vue.http.post(getHostIP() + 'user/loginNoCode', param).then(function (res) {
-                    var data = res.body;
+                var param = {username:this.userName,password:this.password,code:this.dynamicPassword};
+                Vue.http.post(getHostIP() + 'user/login', param).then(function (res) {
+                   var data = res.body;
                     if(data.code == 0){
                         setUser(data.returnValue);
                         setToken(data.returnValue.token);
